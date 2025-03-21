@@ -25,7 +25,7 @@ const Login = ({ navigation }: LoginScreenProps) => {
 
     const OnClickLogin = () => {
         let body = {
-            username: userName,
+            email: userName,
             password: password
         }
         LoginApi({ setIsLoading, body }).then(() => { }).catch((err) => console.log(err))
