@@ -2,34 +2,54 @@ import { View, SafeAreaView, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import {  Home, Login, Profile, } from '@app/screens';
+import { Home, Login, Profile, } from '@app/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Colors from '@app/colors';
 import { Image } from '@app/components';
 import { Assets } from '@app/assets';
+import { useSelector } from 'react-redux';
 
 export type RootStackParamsList = {
     Signup: undefined,
-    Login: undefined
+    Login: undefined,
+    Home: undefined
 };
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 const Tab = createBottomTabNavigator();
 const headerShownFalse = { headerShown: false, orientation: 'portrait' }
 
+const AuthStack = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false, }}>
+            <Stack.Screen name='Home' component={TabBar} />
+        </Stack.Navigator>
+    )
+}
+
+const UnAuthStack = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false, }}>
+            <Stack.Screen name='Login' component={Login} />
+            <Stack.Screen name='Signup' component={TabBar} />
+        </Stack.Navigator>
+    )
+}
+
 const Routes = () => {
+    const { user, isAuthenticated } = useSelector((state: any) => state.auth);
+    console.log({ isAuthenticated })
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false, }}>
-                <Stack.Screen name='Login' component={Login} />
-                <Stack.Screen name='Signup' component={TabBar} />
-            </Stack.Navigator>
+            {isAuthenticated ?
+                <AuthStack />
+                : <UnAuthStack />
+            }
         </NavigationContainer>
     );
 }
 
 const TabBar = () => {
-
     return (
         <Tab.Navigator screenOptions={headerShownFalse} tabBar={props => <Tabs {...props} />}>
             <Tab.Screen name='Home' component={Home} />
@@ -49,15 +69,15 @@ const Tabs = ({ state, navigation }: any) => {
                         const onPress = () => {
                             index === 0 ?
                                 navigation.navigate('Home')
-                                :  navigation.navigate('Profile')
+                                : navigation.navigate('Profile')
                         };
 
                         return (
                             <TouchableOpacity onPress={onPress} style={{ padding: 15 }}>
                                 {index === 0 ?
                                     <Image source={Assets.trails} style={{ width: 30, height: 30 }} tintColor={isFocused ? Colors.primaryRed : Colors.black} />
-                                    
-                                                : <Image source={Assets.more} style={{ width: 30, height: 30 }} tintColor={isFocused ? Colors.primaryRed : Colors.black} />
+
+                                    : <Image source={Assets.more} style={{ width: 30, height: 30 }} tintColor={isFocused ? Colors.primaryRed : Colors.black} />
 
                                 }
                             </TouchableOpacity>

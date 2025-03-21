@@ -2,11 +2,13 @@ import { SafeAreaView, StyleSheet, View, } from 'react-native';
 import React, { useState } from 'react';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamsList } from '@app/routes';
-import { fontFamily } from '@app/constants';
 import { Button, Image, Loader, Text, TextField } from '@app/components';
 import { Strings } from '@app/strings';
 import colors from '@app/colors';
 import { LoginApi } from '@app/services';
+import { useDispatch } from 'react-redux';
+import { login } from '@app/store/slices/authSlice';
+import { ValidateEmail } from '@app/functions';
 
 interface LoginScreenProps {
     navigation: NativeStackNavigationProp<RootStackParamsList, 'Login'>
@@ -14,21 +16,52 @@ interface LoginScreenProps {
 
 const Login = ({ navigation }: LoginScreenProps) => {
 
-    const [userName, setUserName] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-
-    const SetDefaultCredentials = () => {
-        setUserName('michael')
-        setPassword('success-password')
-    }
+    const dispatch = useDispatch();
+    const [userName, setUserName] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [errors, setErrors] = useState<any>({
+        username: false,
+        password: false,
+        invalidCredentials: false
+    })
 
     const OnClickLogin = () => {
-        let body = {
-            email: userName,
-            password: password
+        if (userName === '') {
+            errors.username = Strings.emailRequired;
+            setErrors({ ...errors });
         }
-        LoginApi({ setIsLoading, body }).then(() => { }).catch((err) => console.log(err))
+        else if (userName !== '' && !ValidateEmail(userName)) {
+            errors.username = Strings.emailInValid;
+            setErrors({ ...errors });
+        }
+        if (password == '') {
+            errors.password = Strings.passwordRequired;
+            setErrors({ ...errors });
+        }
+        else if (password != '') {
+            errors.password = false;
+            setErrors({ ...errors });
+        }
+        if (Object.values(errors).every(value => value === false)) {
+            let body = {
+                email: userName,
+                password: password
+            }
+            LoginApi({ setIsLoading, body })
+                .then((res: any) => {
+                    const { user, accessToken } = res.data
+                    dispatch(login({ user, token: accessToken }))
+                    errors.invalidCredentials = false
+                    setErrors({ ...errors })
+                })
+                .catch((error) => {
+                    if (error?.response?.status == 401) {
+                        errors.invalidCredentials = error?.response?.data?.detail
+                        setErrors({ ...errors })
+                    }
+                })
+        }
     }
 
     return (
@@ -41,15 +74,20 @@ const Login = ({ navigation }: LoginScreenProps) => {
             <TextField
                 placeholder={Strings.userName}
                 value={userName}
-                onChangeText={setUserName}
+                onChangeText={(value: string) => { setUserName(value), setErrors({ username: false, invalidCredentials: false }) }}
+                error={errors.username}
             />
             <TextField
                 style={{ marginTop: 10 }}
                 placeholder={Strings.password}
                 password
                 value={password}
-                onChangeText={setPassword}
+                onChangeText={(value: string) => { setPassword(value), setErrors({ password: false, invalidCredentials: false }) }}
+                error={errors.password}
             />
+            {
+                errors.invalidCredentials && <Text style={{ marginTop: 20, color: colors.primaryRed }}>{errors.invalidCredentials}</Text>
+            }
             <View style={{ marginTop: 40 }}>
                 <Button label={Strings.login} onPress={OnClickLogin} />
             </View>

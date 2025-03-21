@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { combineReducers } from "redux";
 import counterReducer from "./slices/counterSlice";
+import authSlice from "./slices/authSlice";
 
 // Persist config
 const persistConfig = {
@@ -13,6 +14,7 @@ const persistConfig = {
 // Combine reducers
 const rootReducer = combineReducers({
     counter: counterReducer,
+    auth: authSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
