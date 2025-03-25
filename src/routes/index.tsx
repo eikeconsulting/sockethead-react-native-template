@@ -8,6 +8,7 @@ import Colors from '@app/colors';
 import { Image } from '@app/components';
 import { Assets } from '@app/assets';
 import { useSelector } from 'react-redux';
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 export type RootStackParamsList = {
     Login: undefined,
@@ -71,9 +72,8 @@ const Tabs = ({ state, navigation }: any) => {
                         return (
                             <TouchableOpacity onPress={onPress} style={{ padding: 15 }}>
                                 {index === 0 ?
-                                    <Image source={Assets.trails} style={{ width: 30, height: 30 }} tintColor={isFocused ? Colors.primaryRed : Colors.black} />
-
-                                    : <Image source={Assets.more} style={{ width: 30, height: 30 }} tintColor={isFocused ? Colors.primaryRed : Colors.black} />
+                                    <AntDesign name='home' size={30} color={isFocused ? Colors.primaryRed : Colors.black} />
+                                    : <AntDesign name='profile' size={30} color={isFocused ? Colors.primaryRed : Colors.black} />
 
                                 }
                             </TouchableOpacity>
