@@ -10,35 +10,32 @@ import { Assets } from '@app/assets';
 import { useSelector } from 'react-redux';
 
 export type RootStackParamsList = {
-    Signup: undefined,
     Login: undefined,
     Home: undefined
 };
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 const Tab = createBottomTabNavigator();
-const headerShownFalse = { headerShown: false, orientation: 'portrait' }
+const headerShownFalse = { headerShown: false, orientation: 'portrait' };
 
 const AuthStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false, }}>
             <Stack.Screen name='Home' component={TabBar} />
         </Stack.Navigator>
-    )
+    );
 }
 
 const UnAuthStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false, }}>
             <Stack.Screen name='Login' component={Login} />
-            <Stack.Screen name='Signup' component={TabBar} />
         </Stack.Navigator>
-    )
+    );
 }
 
 const Routes = () => {
     const { user, isAuthenticated } = useSelector((state: any) => state.auth);
-    console.log({ isAuthenticated })
     return (
         <NavigationContainer>
             {isAuthenticated ?
@@ -71,7 +68,6 @@ const Tabs = ({ state, navigation }: any) => {
                                 navigation.navigate('Home')
                                 : navigation.navigate('Profile')
                         };
-
                         return (
                             <TouchableOpacity onPress={onPress} style={{ padding: 15 }}>
                                 {index === 0 ?
