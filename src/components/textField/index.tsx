@@ -3,9 +3,10 @@ import { TextInput } from 'react-native-paper';
 import Text from '@app/components/text';
 import colors from '@app/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { StyleSheet } from 'react-native';
 
 const TextField = (props: any) => {
-    
+
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(props?.password);
 
     const togglePassword = () => setIsPasswordVisible(!isPasswordVisible);
@@ -24,9 +25,17 @@ const TextField = (props: any) => {
                 right={props.password ? <TextInput.Icon onPress={togglePassword} icon={() => isPasswordVisible ? <Ionicons name='eye-off' size={18} color={colors.blueGrey3} /> : <Ionicons name="eye" size={18} color={colors.blueGrey3} />} /> : null}
                 {...props}
             />
-            {props?.error && <Text style={{ marginTop: 5, color: colors.primaryRed, marginLeft: 5 }}>{props?.error}</Text>}
+            {props?.error && <Text style={styles.errorText}>{props?.error}</Text>}
         </>
     );
 }
+
+const styles = StyleSheet.create({
+    errorText: {
+        marginTop: 5,
+        color: colors.primaryRed,
+        marginLeft: 5,
+    },
+});
 
 export default TextField;

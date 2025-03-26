@@ -68,27 +68,25 @@ const Login = ({ navigation }: LoginScreenProps) => {
         <View style={styles.container}>
             <SafeAreaView />
             <Loader animating={isLoading} />
-            <View style={{ alignItems: 'center', marginBottom: 40 }}>
-                <Image source={{ uri: "https://knowledgemission.kerala.gov.in/img/official-login.jpg" }} style={{ width: 200, height: 200, }} />
+            <View style={styles.imageContainer}>
+                <Image source={{ uri: "https://knowledgemission.kerala.gov.in/img/official-login.jpg" }} style={styles.image} />
             </View>
             <TextField
                 placeholder={Strings.userName}
                 value={userName}
-                onChangeText={(value: string) => { setUserName(value), setErrors({ username: false, invalidCredentials: false }) }}
+                onChangeText={(value: string) => { setUserName(value); setErrors({ username: false, invalidCredentials: false }); }}
                 error={errors.username}
             />
             <TextField
-                style={{ marginTop: 10 }}
+                style={styles.textFieldMargin}
                 placeholder={Strings.password}
                 password
                 value={password}
-                onChangeText={(value: string) => { setPassword(value), setErrors({ password: false, invalidCredentials: false }) }}
+                onChangeText={(value: string) => { setPassword(value); setErrors({ password: false, invalidCredentials: false }); }}
                 error={errors.password}
             />
-            {
-                errors.invalidCredentials && <Text style={{ marginTop: 20, color: colors.primaryRed }}>{errors.invalidCredentials}</Text>
-            }
-            <View style={{ marginTop: 40 }}>
+            {errors.invalidCredentials && <Text style={styles.errorText}>{errors.invalidCredentials}</Text>}
+            <View style={styles.buttonContainer}>
                 <Button label={Strings.login} onPress={OnClickLogin} />
             </View>
         </View>
@@ -102,6 +100,24 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         backgroundColor: colors.white,
-        justifyContent: 'center'
-    }
-})
+        justifyContent: 'center',
+    },
+    imageContainer: {
+        alignItems: 'center',
+        marginBottom: 40,
+    },
+    image: {
+        width: 200,
+        height: 200,
+    },
+    textFieldMargin: {
+        marginTop: 10,
+    },
+    errorText: {
+        marginTop: 20,
+        color: colors.primaryRed,
+    },
+    buttonContainer: {
+        marginTop: 40,
+    },
+});
