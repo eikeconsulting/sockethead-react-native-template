@@ -1,6 +1,6 @@
 import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 import React from 'react';
-import Colors from '@app/colors';
+import { Colors } from '@app/colors';
 
 const Loader = ({ animating = false }: LoaderProps) => {
     if (animating) {

@@ -20,11 +20,11 @@ const urls = {
     dev: getApiUrl(),
     stg: '',
     prd: ''
-}
+};
 
-const baseUrl = urls.dev
+const baseUrl = urls.dev;
 
 export const Endpoints = {
     baseUrl,
     login: `${baseUrl}Auth/login`,
-}
+};
