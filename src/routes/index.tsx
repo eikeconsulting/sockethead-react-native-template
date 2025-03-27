@@ -6,7 +6,7 @@ import { Home, Login, Profile, } from '@app/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Colors } from '@app/colors';
 import { useSelector } from 'react-redux';
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export type RootStackParamsList = {
     Login: undefined,
