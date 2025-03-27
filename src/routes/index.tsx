@@ -4,41 +4,37 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { Home, Login, Profile, } from '@app/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Colors from '@app/colors';
-import { Image } from '@app/components';
-import { Assets } from '@app/assets';
+import { Colors } from '@app/colors';
 import { useSelector } from 'react-redux';
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 export type RootStackParamsList = {
-    Signup: undefined,
     Login: undefined,
     Home: undefined
 };
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 const Tab = createBottomTabNavigator();
-const headerShownFalse = { headerShown: false, orientation: 'portrait' }
+const headerShownFalse = { headerShown: false, orientation: 'portrait' };
 
 const AuthStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false, }}>
             <Stack.Screen name='Home' component={TabBar} />
         </Stack.Navigator>
-    )
+    );
 }
 
 const UnAuthStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false, }}>
             <Stack.Screen name='Login' component={Login} />
-            <Stack.Screen name='Signup' component={TabBar} />
         </Stack.Navigator>
-    )
+    );
 }
 
 const Routes = () => {
     const { user, isAuthenticated } = useSelector((state: any) => state.auth);
-    console.log({ isAuthenticated })
     return (
         <NavigationContainer>
             {isAuthenticated ?
@@ -71,13 +67,11 @@ const Tabs = ({ state, navigation }: any) => {
                                 navigation.navigate('Home')
                                 : navigation.navigate('Profile')
                         };
-
                         return (
                             <TouchableOpacity onPress={onPress} style={{ padding: 15 }}>
                                 {index === 0 ?
-                                    <Image source={Assets.trails} style={{ width: 30, height: 30 }} tintColor={isFocused ? Colors.primaryRed : Colors.black} />
-
-                                    : <Image source={Assets.more} style={{ width: 30, height: 30 }} tintColor={isFocused ? Colors.primaryRed : Colors.black} />
+                                    <AntDesign name='home' size={30} color={isFocused ? Colors.primaryRed : Colors.black} />
+                                    : <AntDesign name='profile' size={30} color={isFocused ? Colors.primaryRed : Colors.black} />
 
                                 }
                             </TouchableOpacity>

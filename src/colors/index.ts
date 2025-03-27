@@ -1,4 +1,4 @@
-export default Colors = {
+export const Colors = {
     white: '#fff',
     black: '#000',
     greyOverlay: "#adadad52",
@@ -9,4 +9,4 @@ export default Colors = {
     blueGrey: '#BBBCBE',
     blueGrey3: "#9A9C9E",
     primaryRed: '#D13D3F'
-}
+};
