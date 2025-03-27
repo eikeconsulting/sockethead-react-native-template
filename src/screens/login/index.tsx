@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamsList } from '@app/routes';
 import { Button, Image, Loader, Text, TextField } from '@app/components';
 import { Strings } from '@app/strings';
-import colors from '@app/colors';
+import { Colors } from '@app/colors';
 import { LoginApi } from '@app/services';
 import { useDispatch } from 'react-redux';
 import { login } from '@app/store/slices/authSlice';
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
-        backgroundColor: colors.white,
+        backgroundColor: Colors.white,
         justifyContent: 'center',
     },
     imageContainer: {
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     },
     errorText: {
         marginTop: 20,
-        color: colors.primaryRed,
+        color: Colors.primaryRed,
     },
     buttonContainer: {
         marginTop: 40,
