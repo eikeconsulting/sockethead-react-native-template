@@ -4,9 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { Home, Login, Profile, } from '@app/screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Colors from '@app/colors';
-import { Image } from '@app/components';
-import { Assets } from '@app/assets';
+import { Colors } from '@app/colors';
 import { useSelector } from 'react-redux';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
