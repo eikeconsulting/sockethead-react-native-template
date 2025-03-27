@@ -7,6 +7,10 @@ export const fontFamily = {
     bold: Platform.OS == "ios" ? 'Outfit-Bold' : 'Outfit-Bold',
     light: Platform.OS == "ios" ? 'Outfit-Light' : 'Outfit-Light',
     thin: Platform.OS == "ios" ? 'Outfit-Thin' : 'Outfit-Thin',
+    MontserratRegular: Platform.OS == "ios" ? 'Montserrat-Regular' : 'Montserrat-Regular',
+    MontserratMedium: Platform.OS == "ios" ? 'Montserrat-Medium' : 'Montserrat-Medium',
+    MontserratBold: Platform.OS == "ios" ? 'Montserrat-Bold' : 'Montserrat-Bold',
+    MontserratBlack: Platform.OS == "ios" ? 'Montserrat-Black' : 'Montserrat-Black',
 }
 
 export const DATE_TIME_FORMARTS = {
