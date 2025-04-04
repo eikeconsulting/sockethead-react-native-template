@@ -9,6 +9,8 @@ import { LoginApi } from '@app/services';
 import { useDispatch } from 'react-redux';
 import { login } from '@app/store/slices/authSlice';
 import { ValidateEmail } from '@app/functions';
+import { fontFamily } from '@app/constants';
+import { Assets } from '@app/assets';
 
 interface LoginScreenProps {
     navigation: NativeStackNavigationProp<RootStackParamsList, 'Login'>
@@ -64,6 +66,30 @@ const Login = ({ navigation }: LoginScreenProps) => {
         }
     }
 
+    return (
+        <View style={{ flex: 1, backgroundColor: '#FFF' }}>
+            <View style={{ flex: 1 }}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+                    <View style={{ position: 'absolute', left: -35, marginTop: -170, }}>
+                        <Image source={Assets.tito} style={{ width: 120, height: 120 }} />
+                    </View>
+                    <Text style={{ fontSize: 16, marginHorizontal: 26, textAlign: 'center', color: '#D13D3F' }}>
+                        This app provides general tips.
+                    </Text>
+                    <Text style={{ fontSize: 16, marginHorizontal: 26, textAlign: 'center', color: '#D13D3F' }}>
+                        It is not intended to replace professional advice, diagnosis, or treatment.
+                    </Text>
+                    <Text style={{ fontSize: 14, marginTop: 26, marginHorizontal: 26, textAlign: 'center', color: '#333333' }}>
+                        Always consult with a qualified healthcare provider, therapist, or other relevant professional before making changes to your routine. The information provided is for informational purposes only.
+                    </Text>
+                </View>
+            </View>
+            <Text style={{ margin: 26, marginTop: 0, fontSize: 12, textAlign: 'center', color: '#333333' }}>
+                Copyright © Eike Consulting, LLC. All rights reserved.
+                little things today™, little things™, little words™ and little movement™ are trademarks of Eike Consulting, LLC.
+            </Text>
+        </View>
+    )
     return (
         <View style={styles.container}>
             <SafeAreaView />
