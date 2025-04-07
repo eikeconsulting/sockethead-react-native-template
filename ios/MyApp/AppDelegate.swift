@@ -2,7 +2,6 @@ import UIKit
 import React
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
-// import RNSplashScreen 
 
 @main
 class AppDelegate: RCTAppDelegate {
@@ -16,7 +15,7 @@ class AppDelegate: RCTAppDelegate {
 
     let result = super.application(application, didFinishLaunchingWithOptions: launchOptions)
 
-    // RNSplashScreen.show() // here
+    RNSplashScreen.show() // here
 
     return result
   }
