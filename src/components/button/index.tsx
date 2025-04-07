@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import Text from '@app/components/text';
 import Loader from '@app/components/loader';
-import Colors from '@app/colors';
+import { Colors } from '@app/colors';
 
 const Button = ({
     label = 'Default Label',
