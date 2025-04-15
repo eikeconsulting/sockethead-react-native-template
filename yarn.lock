@@ -6820,6 +6820,11 @@ react-native-device-info@^14.0.4:
   resolved "https://registry.npmjs.org/react-native-device-info/-/react-native-device-info-14.0.4.tgz"
   integrity sha512-NX0wMAknSDBeFnEnSFQ8kkAcQrFHrG4Cl0mVjoD+0++iaKrOupiGpBXqs8xR0SeJyPC5zpdPl4h/SaBGly6UxA==
 
+react-native-error-boundary@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-error-boundary/-/react-native-error-boundary-2.0.0.tgz#5d19145bb78dfedad788f6ccca85d811fd3a8023"
+  integrity sha512-Od5jZH5DEDuxFI1x+AzCwufpMMJleEJAAj5qOBDA6Ez5+EN2rw5/59/uwW4oGMCgjsB6rpx7yIKHCMx5aIlpdQ==
+
 react-native-gesture-handler@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.24.0.tgz#b6e1f13ec9bf8dfa5f4911854b6e0d73d882a81a"
