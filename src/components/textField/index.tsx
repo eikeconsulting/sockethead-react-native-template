@@ -5,7 +5,7 @@ import { Colors } from '@app/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { StyleSheet } from 'react-native';
 import { fontFamily as ff } from '@app/constants';
-import { RFValue } from 'react-native-responsive-fontsize';
+import { moderateScale } from 'react-native-size-matters';
 
 const TextField = (props: any) => {
 
@@ -13,7 +13,7 @@ const TextField = (props: any) => {
     const defaultFontColor = Colors.textColor;
     const flattenedStyle = StyleSheet.flatten(props?.style) || {};
     const { fontFamily = defaultFontFamily, color = defaultFontColor, fontSize, ...rest } = flattenedStyle;
-    const responsiveFontSize = flattenedStyle?.fontSize ? RFValue(flattenedStyle?.fontSize) : RFValue(12);
+    const responsiveFontSize = flattenedStyle?.fontSize ? moderateScale(flattenedStyle?.fontSize) : moderateScale(12);
     const textStyle = { fontFamily, color, fontSize: responsiveFontSize, ...rest, };
 
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(props?.password);

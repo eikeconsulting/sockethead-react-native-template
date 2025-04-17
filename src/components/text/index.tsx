@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text as RNText } from 'react-native';
+import { StyleSheet, Text as RNText, TextStyle } from 'react-native';
 import { fontFamily as ff } from '@app/constants';
 import { Colors } from '@app/colors';
-import { RFValue } from "react-native-responsive-fontsize";
+import { moderateScale } from 'react-native-size-matters';
 
 interface TextProps {
-    children: any;
-    style?: any;
+    children: React.ReactNode;
+    style?: TextStyle | TextStyle[];
     numberOfLines?: number;
     onPress?: () => void;
 };
@@ -18,7 +18,7 @@ const Text = ({ children, style = {}, numberOfLines = 0, onPress }: TextProps) =
 
     const { fontFamily = defaultFontFamily, color = defaultFontColor, fontSize, ...rest } = flattenedStyle;
 
-    const responsiveFontSize = flattenedStyle?.fontSize ? RFValue(flattenedStyle?.fontSize) : RFValue(12);
+    const responsiveFontSize = flattenedStyle?.fontSize ? moderateScale(flattenedStyle?.fontSize) : moderateScale(12);
 
     const textStyle = {
         fontFamily,
