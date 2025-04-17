@@ -1,33 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text as RNText } from 'react-native';
+import { StyleSheet, Text as RNText, TextStyle } from 'react-native';
 import { fontFamily as ff } from '@app/constants';
 import { Colors } from '@app/colors';
+import { getTextStyle } from '@app/utils/styleUtils';
+
+interface TextProps {
+    children: React.ReactNode;
+    style?: TextStyle | TextStyle[];
+    numberOfLines?: number;
+    onPress?: () => void;
+};
 
 const Text = ({ children, style = {}, numberOfLines = 0, onPress }: TextProps) => {
-    const defaultFontFamily = ff.regular;
-    const defaultFontColor = Colors.textColor;
-
     const flattenedStyle = StyleSheet.flatten(style);
-    const { fontFamily = defaultFontFamily, color = defaultFontColor, ...rest } = flattenedStyle;
+    const textStyle = getTextStyle(flattenedStyle);
 
-    const textProps = {
-        ...rest,
+    const textProps: any = {
         numberOfLines,
-        style: [{ fontFamily, color }, flattenedStyle],
+        style: textStyle
     };
 
     if (onPress) {
         textProps.onPress = onPress;
     }
 
-    return <RNText {...textProps}>{children}</RNText>;
+    return <RNText maxFontSizeMultiplier={1.5} {...textProps}>{children}</RNText>;
 };
 
 export default Text;
-
-interface TextProps {
-    children: any,
-    style?: any,
-    numberOfLines?: number,
-    onPress?: Function,
-};
