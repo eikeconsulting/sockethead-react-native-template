@@ -18,6 +18,6 @@ import App from './App';
 import StorybookUI from './.storybook'; // Import Storybook
 import { name as appName } from './app.json';
 
-const SHOW_STORYBOOK = true; // Set to true to enable Storybook
+const SHOW_STORYBOOK = false; // Set to true to enable Storybook
 
 AppRegistry.registerComponent(appName, () => (SHOW_STORYBOOK ? StorybookUI : App));

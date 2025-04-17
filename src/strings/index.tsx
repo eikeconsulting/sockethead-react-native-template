@@ -14,7 +14,5 @@ export const Strings = {
     specialCharacterValidation: "Password must contain at least one special character.",
     eightCharatersValidation: "Password must be at least 8 characters long and contain only letters, digits, and the following special characters: @$!%*?&",
     passwordIsValid: "Password is valid",
-    profile: "Profile",
-    headerCenterBoxText: "The header center text",
-    headerRightBoxText: "The header right text"
+    profile: "Profile"
 };

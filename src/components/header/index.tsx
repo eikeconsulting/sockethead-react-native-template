@@ -1,23 +1,19 @@
 import React from "react";
-import { View, StyleSheet, Text, ImageSourcePropType, ViewStyle, ImageStyle } from "react-native";
-import { Colors } from "@app/colors";
-import { Image } from "@app/components";
-import { Assets } from "@app/assets";
-
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { scale } from "react-native-size-matters";
+import BackArrow from "@app/assets/backArrow.svg";
 interface Props {
-  imageSource?: ImageSourcePropType;
   isLeftBoxImgVisible?: boolean;
   isCenterBoxVisible?: boolean;
   isCenterBoxElementType?: string;
-  centerBoxElement?: ImageSourcePropType | string;
+  centerBoxElement?: React.ReactNode;
   isRightBoxVisible?: boolean;
   isRightBoxElementType?: string;
-  rightBoxElement?: ImageSourcePropType | string;
+  rightBoxElement?: React.ReactNode;
 }
 
 const Header = ({
   isLeftBoxImgVisible = true,
-  imageSource = Assets.headerBackArrow,
   isCenterBoxVisible,
   isCenterBoxElementType,
   centerBoxElement,
@@ -25,63 +21,54 @@ const Header = ({
   isRightBoxElementType,
   rightBoxElement
 }: Props) => {
+
   return (
     <View style={styles.row}>
-      <View style={styles.box}>
-        {isLeftBoxImgVisible ?
-        <Image source={imageSource} style={styles.image} resizeMode="contain" />
-        : null}
-      </View>
-      
-      {isCenterBoxVisible ? (
-        <View style={[styles.box, styles.flexBox, styles.alignItem]}>
-          {isCenterBoxElementType === "image" && typeof centerBoxElement !== "string" ? (
-            <Image source={centerBoxElement} style={styles.image} resizeMode="contain" />
-          ) : isCenterBoxElementType === "text" && typeof centerBoxElement === "string" ? (
-            <Text>{centerBoxElement}</Text>
-          ) : null}
-        </View>
-      ) : null}
+      <TouchableOpacity style={styles.leftBox}>
+        {isLeftBoxImgVisible && <BackArrow width={scale(44)} height={scale(44)} />}
+      </TouchableOpacity>
 
-      {isRightBoxVisible ? (
-        <View style={styles.box}>
-          {isRightBoxElementType === "image" && typeof rightBoxElement !== "string" ? (
-            <Image source={rightBoxElement} style={styles.image} resizeMode="contain" />
+      <View style={styles.centerBox}>
+        {isCenterBoxVisible ? (
+          isCenterBoxElementType === "image" && typeof centerBoxElement !== "string" ? (
+            centerBoxElement
+          ) : isCenterBoxElementType === "text" && typeof centerBoxElement === "string" ? (
+            <Text numberOfLines={2}>{centerBoxElement}</Text>
+          ) : null
+        ) : null}
+      </View>
+
+      <View style={styles.rightBox}>
+        {isRightBoxVisible ? (
+          isRightBoxElementType === "image" && typeof rightBoxElement !== "string" ? (
+            rightBoxElement
           ) : isRightBoxElementType === "text" && typeof rightBoxElement === "string" ? (
-            <Text>{rightBoxElement}</Text>
-          ) : null}
-        </View>
-      ) : null}
+            <Text numberOfLines={2}>{rightBoxElement}</Text>
+          ) : null
+        ) : null}
+      </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create<{
-  row: ViewStyle;
-  box: ViewStyle;
-  flexBox: ViewStyle;
-  alignItem: ViewStyle;
-  image: ImageStyle;
-}>({
+const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 5,
-    backgroundColor: Colors.white,
+    alignItems: "center",
   },
-  box: {
-    padding: 20,
+  leftBox: {
+    flex: 0.15,
+    alignItems: "center",
   },
-  flexBox: {
-    flex: 1,
-  },
-  alignItem: {
+  centerBox: {
+    flex: 0.7,
     alignItems: "center",
     justifyContent: "center",
   },
-  image: {
-    width: 100,
-    height: 100,
+  rightBox: {
+    flex: 0.15,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

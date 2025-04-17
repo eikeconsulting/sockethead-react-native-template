@@ -1,6 +1,5 @@
 export const Assets = {
-    noProfile: require('./noProfile.png'),
-    headerBackArrow: require('./back-arrow.png'),
-    headerIconShare: require('./icon-share.png'),
-    backArrow: require('./backArrow.svg'),
+    noProfile: require('@app/assets/noProfile.png'),
+    backArrow: require('@app/assets/backArrow.svg'),
+    headerIconShare: require('@app/assets/icon-share.svg'),
 }
