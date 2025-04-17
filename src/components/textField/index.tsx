@@ -4,17 +4,11 @@ import Text from '@app/components/text';
 import { Colors } from '@app/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { StyleSheet } from 'react-native';
-import { fontFamily as ff } from '@app/constants';
-import { moderateScale } from 'react-native-size-matters';
+import { getTextStyle } from '@app/utils/styleUtils';
 
 const TextField = (props: any) => {
-
-    const defaultFontFamily = ff.regular;
-    const defaultFontColor = Colors.textColor;
     const flattenedStyle = StyleSheet.flatten(props?.style) || {};
-    const { fontFamily = defaultFontFamily, color = defaultFontColor, fontSize, ...rest } = flattenedStyle;
-    const responsiveFontSize = flattenedStyle?.fontSize ? moderateScale(flattenedStyle?.fontSize) : moderateScale(12);
-    const textStyle = { fontFamily, color, fontSize: responsiveFontSize, ...rest, };
+    const textStyle = getTextStyle(flattenedStyle);
 
     const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(props?.password);
 
@@ -25,8 +19,8 @@ const TextField = (props: any) => {
             <TextInput
                 {...props}
                 mode='outlined'
-                theme={{ roundness: 12, colors: { background: Colors.white, }, fonts: { bodyLarge: { fontFamily: fontFamily } } }}
-                textColor={color ?? Colors.black}
+                theme={{ roundness: 12, colors: { background: Colors.white, }, fonts: { bodyLarge: { fontFamily: textStyle.fontFamily } } }}
+                textColor={textStyle.color ?? Colors.black}
                 autoCapitalize={props?.password ? "none" : "sentences"}
                 activeOutlineColor={Colors.blueGrey3}
                 outlineColor={Colors.blueGrey3}

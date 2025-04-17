@@ -18,3 +18,5 @@ export const DATE_TIME_FORMARTS = {
     llll: 'llll',
     dateTimeInAMPM: "DD MMM YYYY, hh:mm A"
 }
+
+export const DEFAULT_FONT_SIZE = 12;
